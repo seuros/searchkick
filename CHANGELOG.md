@@ -3,6 +3,7 @@
 - Much better performance for where queries if no facets
 - Added basic support for regex
 - Added support for routing
+- Fix Reinder V2 to use GlobalID
 
 ## 0.8.7
 

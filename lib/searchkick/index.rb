@@ -92,7 +92,7 @@ module Searchkick
 
     def reindex_record_async(record)
       if defined?(Searchkick::ReindexV2Job)
-        Searchkick::ReindexV2Job.perform_later(record.class.name, record.id.to_s)
+        Searchkick::ReindexV2Job.perform_later(record)
       else
         Delayed::Job.enqueue Searchkick::ReindexJob.new(record.class.name, record.id.to_s)
       end

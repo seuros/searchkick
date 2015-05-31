@@ -16,7 +16,7 @@ class TestReindexV2Job < Minitest::Test
     product = Product.create!(name: "Boom")
     Product.searchkick_index.refresh
     assert_search "*", []
-    Searchkick::ReindexV2Job.perform_later("Product", product.id.to_s)
+    Searchkick::ReindexV2Job.perform_later(product)
     Product.searchkick_index.refresh
     assert_search "*", ["Boom"]
   end
@@ -26,7 +26,7 @@ class TestReindexV2Job < Minitest::Test
     Product.reindex
     assert_search "*", ["Boom"]
     product.destroy
-    Searchkick::ReindexV2Job.perform_later("Product", product.id.to_s)
+    Searchkick::ReindexV2Job.perform_later(product)
     Product.searchkick_index.refresh
     assert_search "*", []
   end
